@@ -1,0 +1,19 @@
+//
+// Prefix header for all source files of the 'ELWeChatDylib' target in the 'ELWeChatDylib' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import "/opt/theos/Prefix.pch"  //path/to/theos/Prefix.pch
+#import "ELAppManage.h"
+#import "YYModel.h"
+
+#define kDocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+
+
+//红包信息
+#define kRedInfoPath [kDocumentPath stringByAppendingPathComponent:@"KRedInfo.data"]
+
+#define kAppDataPath [kDocumentPath stringByAppendingPathComponent:@"KAppData.data"]
+
+#endif
