@@ -7,7 +7,7 @@ QQ交流群：930556714（有问题请加）
 链接: https://pan.baidu.com/s/11LlvsFjERRrBN0l9s2Qqew 提取码: epcg
 
 ### 关于安装
-云盘提供.ipa，需要重签。可以用Xcode，或者XX助手。
+云盘提供.ipa，下面提供几种方法可以使用：https://www.jianshu.com/p/2bf09385741a
 
 
 ### 使用
