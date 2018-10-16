@@ -7,6 +7,7 @@
     #import "/opt/theos/Prefix.pch"  //path/to/theos/Prefix.pch
 #import "ELAppManage.h"
 #import "YYModel.h"
+#import "HUD.h"
 
 #define kDocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -15,5 +16,8 @@
 #define kRedInfoPath [kDocumentPath stringByAppendingPathComponent:@"KRedInfo.data"]
 
 #define kAppDataPath [kDocumentPath stringByAppendingPathComponent:@"KAppData.data"]
+
+
+#define UIColorFromHex(s) [UIColor colorWithRed:(((s & 0xFF0000) >> 16))/255.0 green:(((s &0xFF00) >>8))/255.0 blue:((s &0xFF))/255.0 alpha:1.0]
 
 #endif

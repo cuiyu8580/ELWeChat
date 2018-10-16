@@ -36,9 +36,13 @@
     
     [self.tableViewInfo clearAllSection];
     
+    
+    
     [self addRedEnvelopSection];
     
     [self addGroupManageSection];
+    
+    [self addMessageSection];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -95,6 +99,32 @@
 {
     
     [ELAppManage sharedManage].appConfig.groupManage = GroupManageSwitch.on;
+    
+    
+}
+
+
+- (void)addMessageSection
+{
+    
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoDefaut];
+    
+    [sectionInfo addCell:[self addMessageSectionCell]];
+    
+    [self.tableViewInfo addSection:sectionInfo];
+}
+
+- (MMTableViewCellInfo *)addMessageSectionCell
+{
+    
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(MessageClick:) target:self title:@"消息防撤回" on:[ELAppManage sharedManage].appConfig.Message];
+    
+}
+
+- (void)MessageClick:(UISwitch *)MessageSwitch
+{
+    
+    [ELAppManage sharedManage].appConfig.Message = MessageSwitch.on;
     
     
 }

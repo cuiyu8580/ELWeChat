@@ -15,6 +15,9 @@
 
 @property (nonatomic,assign) BOOL groupManage;
 
+@property (nonatomic,assign) BOOL Message;
+
+
 
 - (BOOL)saveAppInfo:(ELWeChatConfig *)Config;
 

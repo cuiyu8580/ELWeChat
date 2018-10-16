@@ -69,7 +69,8 @@
 - (void)AddLocalMsg:(id)arg1 MsgWrap:(id)arg2 fixTime:(_Bool)arg3 NewMsgArriveNotify:(_Bool)arg4;
 - (void)AddMsg:(id)arg1 MsgWrap:(id)arg2;
 - (void)AddAppMsg:(id)arg1 MsgWrap:(id)arg2 Data:(id)arg3 Scene:(unsigned int)arg4;
-
+- (void)AsyncOnAddMsg:(id)arg1 MsgWrap:(id)arg2;
+- (id)GetMsg:(id)arg1 n64SvrID:(long long)arg2;
 
 @end
 
@@ -170,6 +171,8 @@
 @property(retain, nonatomic) NSString *m_nsHeadImgUrl;
 @property(retain, nonatomic) NSString *m_nsNickName;
 
+@property(retain, nonatomic) NSString *m_nsOwner;
+
 - (id)getContactDisplayName;
 + (id)getChatRoomMemberWithoutMyself:(id)arg1;
 - (id)getChatRoomMemberDisplayName:(id)arg1;
@@ -198,6 +201,13 @@
 
 @end
 
+@interface CGroupMgr
+
+- (_Bool)SetChatRoomDesc:(id)arg1 Desc:(id)arg2 Flag:(unsigned int)arg3;
+
+- (_Bool)DeleteGroupMember:(id)arg1 withMemberList:(id)arg2 scene:(unsigned long long)arg3;
+
+@end
 
 @interface CContactMgr : NSObject
 
@@ -371,6 +381,13 @@
 - (void)stopLoading;
 - (void)stopLoadingWithFailText:(NSString *)text;
 - (void)stopLoadingWithOKText:(NSString *)text;
+
+@end
+
+
+@interface ChatRoomInfoViewController: MMUIViewController
+
+- (void)reloadTableData;
 
 @end
 
