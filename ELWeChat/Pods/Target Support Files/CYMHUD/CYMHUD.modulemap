@@ -1,0 +1,6 @@
+framework module CYMHUD {
+  umbrella header "CYMHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}
