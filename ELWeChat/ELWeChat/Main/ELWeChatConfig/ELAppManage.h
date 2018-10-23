@@ -21,5 +21,4 @@
 @property (nonatomic,strong) ELRedEnvelopInfo *redInfo;
 
 
-
 @end

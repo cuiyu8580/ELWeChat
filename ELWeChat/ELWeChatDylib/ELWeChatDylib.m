@@ -15,9 +15,11 @@
 #import <MDCycriptManager.h>
 #import "ELWeChatHeaderinfo.h"
 #import "ELSettingViewController.h"
+#import "ELAppManage.h"
 
 CHConstructor{
     NSLog(INSERT_SUCCESS_WELCOME);
+    
     
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
@@ -37,6 +39,8 @@ CHConstructor{
         
     }];
 }
+
+
 
 
 CHDeclareClass(CustomViewController)
@@ -188,7 +192,8 @@ CHDeclareClass(CMessageMgr)
 
 //拦截别人的撤回消息，自己的撤回消息--RevokeMsg
 
-CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap *, msgWrap)
+
+CHOptimizedMethod1(self, void, CMessageMgr, onRevokeMsg, CMessageWrap *, msgWrap)
 {
     if([ELAppManage sharedManage].appConfig.Message)
     {
@@ -246,7 +251,7 @@ CHMethod1(void, CMessageMgr, onRevokeMsg, CMessageWrap *, msgWrap)
     
 }
 
-CHMethod4(void, CMessageMgr, AddLocalMsg, NSString *, arg1, MsgWrap, CMessageWrap*, arg2, fixTime, BOOL, arg3, NewMsgArriveNotify, BOOL, arg4)
+CHOptimizedMethod4(self, void, CMessageMgr, AddLocalMsg, NSString *, arg1, MsgWrap, CMessageWrap*, arg2, fixTime, BOOL, arg3, NewMsgArriveNotify, BOOL, arg4)
 {
     
    // NSString *content = [arg2 m_nsContent];
@@ -262,13 +267,11 @@ CHMethod4(void, CMessageMgr, AddLocalMsg, NSString *, arg1, MsgWrap, CMessageWra
 
 
 
-CHMethod2(void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
+CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
     NSString* content = [msgWrap m_nsContent];
     if([msgWrap m_uiMessageType] == 1){
         NSLog(@"收到消息: %@", content);
     }
-    
-
     //红包消息
     if([msgWrap m_uiMessageType] == 49 && [content rangeOfString:@"wxpay://"].location != NSNotFound)
     {
@@ -353,7 +356,7 @@ CHMethod2(void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWrap, CMessageWra
     
 }
 
-CHMethod2(void, CMessageMgr, AddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
+CHOptimizedMethod2(self, void, CMessageMgr, AddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msgWrap){
     
 
     if ([msgWrap m_uiMessageType] == 1 && [ELAppManage sharedManage].appConfig.groupManage)
@@ -468,6 +471,85 @@ CHMethod2(void, CMessageMgr, AddMsg, NSString*, msg, MsgWrap, CMessageWrap*, msg
 }
 
 
+CHDeclareClass(ManualAuthAesReqData)
+
+CHOptimizedMethod1(self, void, ManualAuthAesReqData, setbundleId, NSString *, bundleId)
+{
+    
+    bundleId = @"com.tencent.xin";
+    
+    CHSuper1(ManualAuthAesReqData, setbundleId, bundleId);
+}
+
+CHDeclareClass(WWKBaseObject)
+
+
+CHOptimizedMethod1(self, void, WWKBaseObject, setbundleID, NSString *, bundleID){
+    
+    bundleID = @"com.tencent.xin";
+    
+    CHSuper1(WWKBaseObject, setbundleID, bundleID);
+    
+
+}
+
+CHDeclareClass(NSDictionary)
+
+CHMethod1(id, NSDictionary, objectForKey, id, arg1)
+{
+    NSString *keys = (NSString *)arg1;
+    
+    if([keys isEqualToString:@"CFBundleIdentifier"])
+    {
+        return @"com.tencent.xin";
+    }
+    
+    CHSuper1(NSDictionary, objectForKey, arg1);
+}
+
+
+CHDeclareClass(JailBreakHelper)
+
+CHMethod0(BOOL, JailBreakHelper, HasInstallJailbreakPluginInvalidIAPPurchase)
+{
+    
+   return NO;
+}
+
+CHOptimizedMethod1(self, BOOL, JailBreakHelper, HasInstallJailbreakPlugin, id, arg1)
+{
+    return NO;
+    
+}
+
+CHMethod0(BOOL, JailBreakHelper, IsJailBreak)
+{
+   return NO;
+    
+}
+
+
+CHDeclareClass(ClientCheckMgr)
+
+
+CHMethod1(void, ClientCheckMgr, checkHookWithSeq, int, arg1)
+{
+    CHSuper1(ClientCheckMgr, checkHookWithSeq, arg1);
+    
+}
+
+
+CHMethod1(void, ClientCheckMgr, checkHook, id, arg1)
+{
+     CHSuper1(ClientCheckMgr, checkHook, arg1);
+}
+
+CHMethod1(void, ClientCheckMgr, checkConsistency, id, arg1)
+{
+    CHSuper1(ClientCheckMgr, checkConsistency, arg1);
+}
+
+
 #pragma mark - NewSettingViewController
 
 CHDeclareClass(NewSettingViewController)
@@ -496,17 +578,97 @@ CHDeclareMethod0(void, NewSettingViewController, WeChatHelper) {
     ELSettingViewController *settingViewController = [ELSettingViewController new];
     [self.navigationController PushViewController:settingViewController animated:YES];
 }
+//- (void)makeCell:(id)arg1 cellInfo:(id)arg2;
+CHDeclareClass(SetDeviceSafeViewController)
+
+
+CHOptimizedMethod2(self, void, SetDeviceSafeViewController, makeCell, id, arg1, cellInfo, id, arg2)
+{
+    CHSuper2(SetDeviceSafeViewController, makeCell, arg1, cellInfo, arg2);
+    
+}
+
+CHDeclareClass(WCDeviceStepObject)
+
+CHOptimizedMethod1(self, void, WCDeviceStepObject, setM7StepCount, NSInteger, arg1)
+{
+    
+    if([ELAppManage sharedManage].appConfig.StepManage)
+    {
+        
+        NSInteger ResetNum = [ELAppManage sharedManage].appConfig.ResetStepNum ;
+        
+        arg1 = arg1 > ResetNum ? arg1 :ResetNum;
+    }
+    
+    CHSuper1(WCDeviceStepObject, setM7StepCount, arg1);
+}
+//- (void)onUploadDeviceStepReponse:(id)arg1 stepCount:(unsigned int)arg2 HKStepCount:(unsigned int)arg3 M7StepCount:(unsigned int)arg4 sourceWhiteList:(id)arg5 ErrorCode:(int)arg6;
+
+CHDeclareClass(WCDeviceBrandMgr)
+
+CHOptimizedMethod6(self, void, WCDeviceBrandMgr, onUploadDeviceStepReponse, id, arg1, stepCount, int, arg2, HKStepCount, int, arg3, M7StepCount, int, arg4, sourceWhiteList, id, arg5, ErrorCode, int, arg6)
+{
+    
+    CHSuper6(WCDeviceBrandMgr, onUploadDeviceStepReponse, arg1, stepCount, arg2, HKStepCount, arg3, M7StepCount, arg4, sourceWhiteList, arg5, ErrorCode, arg6);
+    
+}
+
+
+CHDeclareClass(WCTimelineDataProvider)
+
+CHOptimizedMethod3(self, void, WCTimelineDataProvider, requestForSnsTimeLineRequest, id, arg1, minID, id, arg2, lastRequestTime, int, arg3)
+{
+    
+    CHSuper3(WCTimelineDataProvider, requestForSnsTimeLineRequest, arg1, minID, arg2, lastRequestTime, arg3);
+    
+}
+//- (void)MessageReturn:(id)arg1 Event:(unsigned int)arg2;
+
+CHOptimizedMethod2(self, BOOL, WCTimelineDataProvider, responseForSnsTimeLineResponse, id, arg1, Event, int, arg2)
+{
+    
+    
+   return CHSuper2(WCTimelineDataProvider, responseForSnsTimeLineResponse, arg1, Event, arg2);
+    
+}
+//- (_Bool)responseForSnsTimeLineResponse:(id)arg1 Event:(unsigned int)arg2;
+
+
 
 
 #pragma mark - CHConstructor
 
 CHConstructor{
+    
+    
+    
+    CHLoadLateClass(WCTimelineDataProvider);
+    
+    CHHook3(WCTimelineDataProvider, requestForSnsTimeLineRequest, minID, lastRequestTime);
+    
+    CHHook2(WCTimelineDataProvider, responseForSnsTimeLineResponse, Event);
+    
+    CHLoadLateClass(WCDeviceBrandMgr);
+    
+    CHHook6(WCDeviceBrandMgr, onUploadDeviceStepReponse, stepCount, HKStepCount, M7StepCount, sourceWhiteList, ErrorCode);
+    
+
+    CHLoadLateClass(WCDeviceStepObject);
+    
+    CHHook1(WCDeviceStepObject, setM7StepCount);
+    
+    CHLoadLateClass(SetDeviceSafeViewController);
+    
+    CHHook2(SetDeviceSafeViewController, makeCell, cellInfo);
+    
+    
     //---MicroMessengerAppDelegate---//
     CHLoadLateClass(MicroMessengerAppDelegate);
     CHHook2(MicroMessengerAppDelegate, application, didFinishLaunchingWithOptions);
     CHHook1(MicroMessengerAppDelegate, applicationWillTerminate);
      CHHook1(MicroMessengerAppDelegate, applicationDidEnterBackground);
-    
+   
     //---WCRedEnvelopesLogicMgr---//
     CHLoadLateClass(WCRedEnvelopesLogicMgr);
     CHHook2(WCRedEnvelopesLogicMgr, OnWCToHongbaoCommonResponse, Request);
@@ -526,6 +688,33 @@ CHConstructor{
     CHClassHook0(NewSettingViewController, reloadTableData);
     
     CHClassHook0(NewSettingViewController, WeChatHelper);
+    
+    //---NewSettingViewController---//
+    CHLoadLateClass(ManualAuthAesReqData);
+
+    
+    CHClassHook1(ManualAuthAesReqData, setbundleId);
+    
+    
+    CHLoadLateClass(WWKBaseObject);
+    
+    CHClassHook1(WWKBaseObject, setbundleID);
+    
+    
+    CHLoadLateClass(ClientCheckMgr);
+    
+    CHClassHook1(ClientCheckMgr, checkHookWithSeq);
+    CHClassHook1(ClientCheckMgr, checkHook);
+    CHClassHook1(ClientCheckMgr, checkConsistency);
+    
+    CHLoadLateClass(JailBreakHelper);
+    CHClassHook0(JailBreakHelper, HasInstallJailbreakPluginInvalidIAPPurchase);
+    CHClassHook1(JailBreakHelper, HasInstallJailbreakPlugin);
+    CHClassHook0(JailBreakHelper, IsJailBreak);
+    
+    CHLoadLateClass(NSDictionary);
+  
+    CHClassHook1(NSDictionary, objectForKey);
     
 }
 

@@ -34,9 +34,15 @@
     
     self.title = @"微信助手";
     
+    [self reloadTableViewData];
+    
+    MMTableView *tableView = [self.tableViewInfo getTableView];
+    [self.view addSubview:tableView];
+}
+
+- (void)reloadTableViewData
+{
     [self.tableViewInfo clearAllSection];
-    
-    
     
     [self addRedEnvelopSection];
     
@@ -44,10 +50,64 @@
     
     [self addMessageSection];
     
+    [self addStepSection];
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     MMTableView *tableView = [self.tableViewInfo getTableView];
-    [self.view addSubview:tableView];
+    [tableView reloadData];
+    
+}
+
+
+
+
+- (void)addStepSection
+{
+    
+    MMTableViewSectionInfo *sectionInfo = [objc_getClass("MMTableViewSectionInfo") sectionInfoDefaut];
+    
+    [sectionInfo addCell:[self addStepSectionCell]];
+    
+    if ([ELAppManage sharedManage].appConfig.StepManage)
+    {
+        [sectionInfo addCell:[self addStepNumberSectionCell]];
+    }
+    
+    
+    [self.tableViewInfo addSection:sectionInfo];
+    
+}
+
+
+- (MMTableViewCellInfo *)addStepSectionCell
+{
+    
+    return [objc_getClass("MMTableViewCellInfo") switchCellForSel:@selector(SetpClick:) target:self title:@"修改步数" on:[ELAppManage sharedManage].appConfig.StepManage];
+    
+}
+
+- (void)SetpClick:(UISwitch *)setpSwitch
+{
+    [ELAppManage sharedManage].appConfig.StepManage = setpSwitch.on;
+    
+    [self reloadTableViewData];
+}
+
+
+
+- (MMTableViewCellInfo *)addStepNumberSectionCell
+{
+    
+    
+    WCDeviceBrandMgr *BrandMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("WCDeviceBrandMgr")];
+    
+    NSInteger LastSetp = [BrandMgr getLastM7Step];
+    
+    NSInteger curSetp = LastSetp > [ELAppManage sharedManage].appConfig.ResetStepNum ? LastSetp : [ELAppManage sharedManage].appConfig.ResetStepNum;
+    
+    
+    return [objc_getClass("MMTableViewCellInfo")  normalCellForSel:@selector(setStepNumber) target:self title:@"微信运动步数" rightValue:[NSString stringWithFormat:@"%ld",(long)curSetp] accessoryType:1];
     
 }
 
@@ -128,10 +188,47 @@
     
     
 }
+
+
+- (void)setStepNumber
+{
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"微信运动设置" message:@"微信最大步数98800,请输入比当前步数更大的步数" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入步数";
+        textField.keyboardType = UIKeyboardTypePhonePad;
+    }];
+    
+    UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString *step = alertController.textFields[0].text;
+        
+        [ELAppManage sharedManage].appConfig.ResetStepNum = [step integerValue];
+        
+        [self reloadTableViewData];
+        
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+
+    [alertController addAction:cancel];
+    
+    [alertController addAction:sure];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 /*
 #pragma mark - Navigation

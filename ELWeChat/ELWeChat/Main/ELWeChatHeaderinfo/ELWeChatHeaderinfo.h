@@ -78,11 +78,11 @@
 
 @property (retain, nonatomic) WCPayInfoItem *m_oWCPayInfoItem;
 @property (assign, nonatomic) NSUInteger m_uiMesLocalID;
-@property (strong, nonatomic) NSString* m_nsFromUsr;            ///< 發信人，可能是群或個人
+@property (strong, nonatomic) NSString* m_nsFromUsr;            ///< 发信人，可能是群或個人
 @property (retain, nonatomic) NSString* m_nsToUsr;              ///< 收信人
 @property (assign, nonatomic) NSUInteger m_uiStatus;
 @property (retain, nonatomic) NSString* m_nsContent;            ///< 消息内容
-@property (retain, nonatomic) NSString* m_nsRealChatUsr;        ///< 群消息的發信人，具体是群里的哪個人
+@property (retain, nonatomic) NSString* m_nsRealChatUsr;        ///< 群消息的发信人，具体是群里的哪個人
 @property (assign, nonatomic) NSUInteger m_uiMessageType;
 @property (assign, nonatomic) long long m_n64MesSvrID;
 @property (assign, nonatomic) NSUInteger m_uiCreateTime;
@@ -391,6 +391,34 @@
 
 @end
 
+@interface ManualAuthAesReqData
+
+
+@property(retain, nonatomic) NSString *bundleId;
+
+@end
+
+@interface JailBreakHelper : NSObject
+
+- (_Bool)HasInstallJailbreakPluginInvalidIAPPurchase;
+- (_Bool)isOverADay;
+- (_Bool)HasInstallJailbreakPlugin:(id)arg1;
+- (_Bool)IsJailBreak;
+@end
+@interface WWKBaseObject : NSObject
+
+@property(copy, nonatomic) NSString *bundleID;
+
+@end
+
+@interface ClientCheckMgr
+
+- (void)checkHookWithSeq:(unsigned int)arg1;
+- (void)checkHook:(id)arg1;
+- (void)reportFileConsistency:(id)arg1 fileName:(id)arg2 offset:(unsigned int)arg3 bufferSize:(unsigned int)arg4 seq:(unsigned int)arg5;
+- (void)checkConsistency:(id)arg1;
+- (void)registerAddImageCallBack;
+@end
 @interface NewSettingViewController: MMUIViewController
 
 - (void)reloadTableData;
@@ -437,9 +465,290 @@
 
 @end
 
+@interface SetDeviceSafeViewController : MMUIViewController
+
+- (void)MessageReturn:(id)arg1 Event:(unsigned int)arg2;
+- (void)MessageReturnDelDevice:(id)arg1 Event:(unsigned int)arg2;
+- (void)OnClickRightTopBtn;
+- (void)commitEditingForRowAtIndexPath:(id)arg1 Cell:(id)arg2;
+- (void)actionCell:(id)arg1;
+- (void)makeCell:(id)arg1 cellInfo:(id)arg2;
+
+@end
+
+
 
 @interface WAStarLinearListViewController : MMUIViewController
 
 
+
+@end
+
+@interface WCAccountLoginLastUserViewController
+
+- (void)onNext;
+
+@end
+
+@interface WCDeviceStepObject
+@property(retain, nonatomic) NSMutableArray *allHKSampleSource; // @synthesize allHKSampleSource;
+@property(nonatomic) unsigned int hkStepCount; // @synthesize hkStepCount;
+@property(nonatomic) unsigned int m7StepCount; // @synthesize m7StepCount;
+@property(nonatomic) unsigned int endTime; // @synthesize endTime;
+@property(nonatomic) unsigned int beginTime;
+
+@end
+
+@interface WCDeviceM7Logic
+
+- (int)getCurrM7StepCount;
+
+@end
+
+@interface WCDeviceBrandMgr
+{
+    WCDeviceM7Logic *_m7Logic;
+}
+
+- (void)onUploadDeviceStepReponse:(id)arg1 stepCount:(unsigned int)arg2 HKStepCount:(unsigned int)arg3 M7StepCount:(unsigned int)arg4 sourceWhiteList:(id)arg5 ErrorCode:(int)arg6;
+
+- (void)onGotDeviceStepObject:(id)arg1;
+
+- (unsigned int)getLastM7Step;
+
+@end
+
+@interface WCTimelineDataProvider
+
+- (void)requestForSnsTimeLineRequest:(id)arg1 minID:(id)arg2 lastRequestTime:(unsigned int)arg3;
+
+- (void)MessageReturn:(id)arg1 Event:(unsigned int)arg2;
+
+- (_Bool)responseForSnsTimeLineResponse:(id)arg1 Event:(unsigned int)arg2;
+
+@end
+
+
+
+@interface WXPBGeneratedMessage : NSObject
+{
+    int _has_bits_[3];
+    int _serializedSize;
+    struct PBClassInfo *_classInfo;
+    id _ivarValueDict;
+}
+
++ (id)parseFromData:(id)arg1;
+- (_Bool)hasProperty:(int)arg1;
+- (unsigned int)continueFlag;
+- (id)baseResponse;
+- (void)setBaseRequest:(id)arg1;
+//- (void)writeValueToCodedOutputDataNoTag:(struct CodedOutputData *)arg1 value:(id)arg2 fieldType:(unsigned char)arg3;
+//- (void)writeValueToCodedOutputData:(struct CodedOutputData *)arg1 value:(id)arg2 fieldNumber:(int)arg3 fieldType:(unsigned char)arg4;
+//- (void)writeToCodedOutputData:(struct CodedOutputData *)arg1;
+- (int)computeValueSizeNoTag:(id)arg1 fieldType:(unsigned char)arg2;
+- (int)computeValueSize:(id)arg1 fieldNumber:(int)arg2 fieldType:(unsigned char)arg3;
+- (int)serializedSize;
+- (id)serializedData;
+- (_Bool)isInitialized;
+- (_Bool)isMessageInitialized:(id)arg1;
+//- (id)readValueFromCodedInputData:(struct CodedInputData *)arg1 fieldType:(unsigned char)arg2;
+//- (id)mergeFromCodedInputData:(struct CodedInputData *)arg1;
+- (id)mergeFromData:(id)arg1;
+- (id)valueAtIndex:(int)arg1;
+- (void)setValue:(id)arg1 atIndex:(int)arg2;
+- (int)indexOfPropertyWithSetter:(const char *)arg1;
+- (int)indexOfPropertyWithGetter:(const char *)arg1;
+- (void)dealloc;
+- (id)init;
+
+@end
+
+
+@interface SKBuiltinString_t : WXPBGeneratedMessage
+{
+}
+
++ (void)initialize;
++ (id)skStringWithString:(id)arg1;
+
+// Remaining properties
+@property(retain, nonatomic) NSString *string; // @dynamic string;
+
+@end
+
+@interface BaseResponse : WXPBGeneratedMessage
+{
+}
+
++ (void)initialize;
+
+// Remaining properties
+@property(retain, nonatomic) SKBuiltinString_t *errMsg; // @dynamic errMsg;
+@property(nonatomic) int ret; // @dynamic ret;
+
+@end
+
+
+@interface UrlInfo : NSObject <NSCopying>
+{
+    NSString *m_nsRequestUrl;
+    NSData *m_dtResponseData;
+    NSString *m_nsRefer;
+    _Bool m_bGetMethod;
+    NSData *m_dtBodyData;
+    NSDictionary *m_dicReq;
+    NSDictionary *m_dicResp;
+    _Bool m_bCdn;
+    NSString *m_nsRequestUrlSuffix;
+    unsigned int m_uiRecvTime;
+    unsigned int m_uiRetCode;
+    unsigned int m_uiDataSize;
+    unsigned int m_uiDnsCostTime;
+    unsigned int m_uiConnectCostTime;
+    unsigned int m_uiSendCostTime;
+    unsigned int m_uiWaitResponseCostTime;
+    unsigned int m_uiReceiveCostTime;
+    NSString *m_nsClientIP;
+    NSString *m_nsServerIP;
+    unsigned int m_uiDnsType;
+    NSString *m_host;
+    NSString *m_nsXErrno;
+    NSMutableArray *m_aryReceiveData;
+    NSString *m_fileMd5;
+    _Bool m_bSupportValidateMd5;
+    _Bool m_bContinueReceive;
+    NSString *m_filePath;
+    _Bool m_useDCIP;
+    _Bool m_fromSns;
+    _Bool m_useXorEncrypt;
+    unsigned long long m_xorEncryKey;
+    unsigned int m_uiXEncIdx;
+    NSString *m_nsXEnc;
+    NSString *m_nsXEncToken;
+    unsigned int m_uiReqestCSeq;
+    unsigned int m_uiResponseCSeq;
+}
+
+@property(nonatomic) unsigned int m_uiResponseCSeq; // @synthesize m_uiResponseCSeq;
+@property(nonatomic) unsigned int m_uiReqestCSeq; // @synthesize m_uiReqestCSeq;
+@property(nonatomic) unsigned int m_uiXEncIdx; // @synthesize m_uiXEncIdx;
+@property(retain, nonatomic) NSString *m_nsXEncToken; // @synthesize m_nsXEncToken;
+@property(retain, nonatomic) NSString *m_nsXEnc; // @synthesize m_nsXEnc;
+@property(nonatomic) unsigned long long m_xorEncryKey; // @synthesize m_xorEncryKey;
+@property(retain, nonatomic) NSMutableArray *m_aryReceiveData; // @synthesize m_aryReceiveData;
+@property(nonatomic) _Bool m_useXorEncrypt; // @synthesize m_useXorEncrypt;
+@property(nonatomic) _Bool m_fromSns; // @synthesize m_fromSns;
+@property(nonatomic) _Bool m_useDCIP; // @synthesize m_useDCIP;
+@property(nonatomic) _Bool m_bSupportValidateMd5; // @synthesize m_bSupportValidateMd5;
+@property(retain, nonatomic) NSString *m_fileMd5; // @synthesize m_fileMd5;
+@property(retain, nonatomic) NSString *m_filePath; // @synthesize m_filePath;
+@property(nonatomic) _Bool m_bContinueReceive; // @synthesize m_bContinueReceive;
+@property(retain, nonatomic) NSString *m_nsXErrno; // @synthesize m_nsXErrno;
+@property(retain, nonatomic) NSString *m_nsRequestUrlSuffix; // @synthesize m_nsRequestUrlSuffix;
+@property(retain, nonatomic) NSString *m_host; // @synthesize m_host;
+@property(nonatomic) unsigned int m_uiDnsType; // @synthesize m_uiDnsType;
+@property(retain, nonatomic) NSString *m_nsServerIP; // @synthesize m_nsServerIP;
+@property(retain, nonatomic) NSString *m_nsClientIP; // @synthesize m_nsClientIP;
+@property(nonatomic) unsigned int m_uiReceiveCostTime; // @synthesize m_uiReceiveCostTime;
+@property(nonatomic) unsigned int m_uiWaitResponseCostTime; // @synthesize m_uiWaitResponseCostTime;
+@property(nonatomic) unsigned int m_uiSendCostTime; // @synthesize m_uiSendCostTime;
+@property(nonatomic) unsigned int m_uiConnectCostTime; // @synthesize m_uiConnectCostTime;
+@property(nonatomic) unsigned int m_uiDnsCostTime; // @synthesize m_uiDnsCostTime;
+@property(nonatomic) unsigned int m_uiDataSize; // @synthesize m_uiDataSize;
+@property(nonatomic) unsigned int m_uiRetCode; // @synthesize m_uiRetCode;
+@property(nonatomic) unsigned int m_uiRecvTime; // @synthesize m_uiRecvTime;
+@property(nonatomic) _Bool m_bCdn; // @synthesize m_bCdn;
+@property(retain, nonatomic) NSDictionary *m_dicResp; // @synthesize m_dicResp;
+@property(retain, nonatomic) NSDictionary *m_dicReq; // @synthesize m_dicReq;
+@property(retain, nonatomic) NSData *m_dtBodyData; // @synthesize m_dtBodyData;
+@property(nonatomic) _Bool m_bGetMethod; // @synthesize m_bGetMethod;
+@property(retain, nonatomic) NSString *m_nsRefer; // @synthesize m_nsRefer;
+@property(retain, nonatomic) NSData *m_dtResponseData; // @synthesize m_dtResponseData;
+@property(retain, nonatomic) NSString *m_nsRequestUrl; // @synthesize m_nsRequestUrl;
+- (id)GenStatStringWithDataType:(int)arg1;
+- (id)GenStatString;
+- (id)init;
+
+@end
+
+@interface SnsServerConfig : WXPBGeneratedMessage
+{
+}
+
++ (void)initialize;
+
+// Remaining properties
+@property(nonatomic) int copyAndPasteWordLimit; // @dynamic copyAndPasteWordLimit;
+@property(nonatomic) int postMentionLimit; // @dynamic postMentionLimit;
+
+@end
+@interface SnsTimeLineResponse : WXPBGeneratedMessage
+{
+}
+
++ (void)initialize;
+
+// Remaining properties
+@property(nonatomic) unsigned int advertiseCount; // @dynamic advertiseCount;
+@property(retain, nonatomic) NSMutableArray *advertiseList; // @dynamic advertiseList;
+@property(retain, nonatomic) BaseResponse *baseResponse; // @dynamic baseResponse;
+@property(nonatomic) unsigned int controlFlag; // @dynamic controlFlag;
+@property(retain, nonatomic) NSString *firstPageMd5; // @dynamic firstPageMd5;
+@property(nonatomic) unsigned int newRequestTime; // @dynamic newRequestTime;
+@property(nonatomic) unsigned int objectCount; // @dynamic objectCount;
+@property(nonatomic) unsigned int objectCountForSameMd5; // @dynamic objectCountForSameMd5;
+@property(retain, nonatomic) NSMutableArray *objectList; // @dynamic objectList;
+@property(nonatomic) unsigned int recCount; // @dynamic recCount;
+@property(retain, nonatomic) NSMutableArray *recList; // @dynamic recList;
+@property(retain, nonatomic) SnsServerConfig *serverConfig; // @dynamic serverConfig;
+@property(retain, nonatomic) SKBuiltinBuffer_t *session; // @dynamic session;
+
+@end
+
+@interface ProtobufCGIWrap : NSObject <NSCopying>
+{
+    WXPBGeneratedMessage *m_pbRequest;
+    Class m_pbRespClass;
+    WXPBGeneratedMessage *m_pbResponse;
+    unsigned int m_uiChannelType;//1
+    unsigned int m_uiCgi;//211
+    unsigned int m_uiScene;//0
+    NSString *m_nsCgiName;//mmsnstimeline
+    NSString *m_nsUri;
+    unsigned int m_uiRequestEncryptType;
+    NSData *m_dtResponseDecryptKey;
+    unsigned int m_uiMessage;//0
+    Class m_eventHandlerClass;
+    NSObject *m_oUserData;
+    UrlInfo *m_oUrlInfo;
+    _Bool m_bNotifyPartLen;
+    unsigned int m_uiRetryCount;//2
+    double m_douTimeout;
+    double m_douReadTimeout;
+    int m_netwrokStrategy;
+    unsigned char m_routeInfo;
+}
+
+@property(nonatomic) unsigned char m_routeInfo; // @synthesize m_routeInfo;
+@property(nonatomic) int m_netwrokStrategy; // @synthesize m_netwrokStrategy;
+@property(nonatomic) double m_douReadTimeout; // @synthesize m_douReadTimeout;
+@property(nonatomic) double m_douTimeout; // @synthesize m_douTimeout;
+@property(nonatomic) unsigned int m_uiRetryCount; // @synthesize m_uiRetryCount;
+@property(nonatomic) _Bool m_bNotifyPartLen; // @synthesize m_bNotifyPartLen;
+@property(retain, nonatomic) UrlInfo *m_oUrlInfo; // @synthesize m_oUrlInfo;
+@property(retain, nonatomic) NSObject *m_oUserData; // @synthesize m_oUserData;
+@property(nonatomic) Class m_eventHandlerClass; // @synthesize m_eventHandlerClass;
+@property(nonatomic) unsigned int m_uiMessage; // @synthesize m_uiMessage;
+@property(retain, nonatomic) NSData *m_dtResponseDecryptKey; // @synthesize m_dtResponseDecryptKey;
+@property(nonatomic) unsigned int m_uiRequestEncryptType; // @synthesize m_uiRequestEncryptType;
+@property(nonatomic) unsigned int m_uiChannelType; // @synthesize m_uiChannelType;
+@property(retain, nonatomic) NSString *m_nsUri; // @synthesize m_nsUri;
+@property(retain, nonatomic) NSString *m_nsCgiName; // @synthesize m_nsCgiName;
+@property(nonatomic) unsigned int m_uiScene; // @synthesize m_uiScene;
+@property(nonatomic) unsigned int m_uiCgi; // @synthesize m_uiCgi;
+@property(retain, nonatomic) WXPBGeneratedMessage *m_pbResponse; // @synthesize m_pbResponse;
+@property(nonatomic) Class m_pbRespClass; // @synthesize m_pbRespClass;
+@property(retain, nonatomic) WXPBGeneratedMessage *m_pbRequest; // @synthesize m_pbRequest;
 
 @end

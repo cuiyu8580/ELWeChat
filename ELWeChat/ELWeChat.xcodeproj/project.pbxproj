@@ -31,12 +31,17 @@
 		3816BB24216CB26000030C99 /* ELWeChatHeaderinfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB1D216CB26000030C99 /* ELWeChatHeaderinfo.h */; };
 		3816BB25216CB26000030C99 /* ELWeChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB1F216CB26000030C99 /* ELWeChatConfig.m */; };
 		3816BB26216CB26000030C99 /* ELWeChatConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB20216CB26000030C99 /* ELWeChatConfig.h */; };
-		3816BB27216CB26000030C99 /* ELSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB22216CB26000030C99 /* ELSettingViewController.m */; };
-		3816BB28216CB26000030C99 /* ELSettingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB23216CB26000030C99 /* ELSettingViewController.h */; };
 		3816BB30216DA57000030C99 /* ELRedEnvelopInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB2E216DA57000030C99 /* ELRedEnvelopInfo.h */; };
 		3816BB31216DA57000030C99 /* ELRedEnvelopInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB2F216DA57000030C99 /* ELRedEnvelopInfo.m */; };
 		3816BB34216DE3A300030C99 /* ELAppManage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB32216DE3A300030C99 /* ELAppManage.h */; };
 		3816BB35216DE3A300030C99 /* ELAppManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB33216DE3A300030C99 /* ELAppManage.m */; };
+		3816BB742177552800030C99 /* MUHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB6F2177552800030C99 /* MUHook.m */; };
+		3816BB752177552800030C99 /* NSObject+MUHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3816BB702177552800030C99 /* NSObject+MUHook.m */; };
+		3816BB762177552800030C99 /* MUHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB712177552800030C99 /* MUHook.h */; };
+		3816BB772177552800030C99 /* MUHRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB722177552800030C99 /* MUHRuntime.h */; };
+		3816BB782177552800030C99 /* NSObject+MUHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB732177552800030C99 /* NSObject+MUHook.h */; };
+		3849A8AF217DBC6400FE65F0 /* ELSettingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */; };
+		3849A8B0217DBC6400FE65F0 /* ELSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */; };
 		95BDD33F998BAAA4AA5F3D37 /* Pods_ELWeChatDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDD126519BA714AF93A52E7 /* Pods_ELWeChatDylib.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,12 +101,17 @@
 		3816BB1D216CB26000030C99 /* ELWeChatHeaderinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELWeChatHeaderinfo.h; sourceTree = "<group>"; };
 		3816BB1F216CB26000030C99 /* ELWeChatConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELWeChatConfig.m; sourceTree = "<group>"; };
 		3816BB20216CB26000030C99 /* ELWeChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELWeChatConfig.h; sourceTree = "<group>"; };
-		3816BB22216CB26000030C99 /* ELSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELSettingViewController.m; sourceTree = "<group>"; };
-		3816BB23216CB26000030C99 /* ELSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELSettingViewController.h; sourceTree = "<group>"; };
 		3816BB2E216DA57000030C99 /* ELRedEnvelopInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELRedEnvelopInfo.h; sourceTree = "<group>"; };
 		3816BB2F216DA57000030C99 /* ELRedEnvelopInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELRedEnvelopInfo.m; sourceTree = "<group>"; };
 		3816BB32216DE3A300030C99 /* ELAppManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELAppManage.h; sourceTree = "<group>"; };
 		3816BB33216DE3A300030C99 /* ELAppManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELAppManage.m; sourceTree = "<group>"; };
+		3816BB6F2177552800030C99 /* MUHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUHook.m; sourceTree = "<group>"; };
+		3816BB702177552800030C99 /* NSObject+MUHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MUHook.m"; sourceTree = "<group>"; };
+		3816BB712177552800030C99 /* MUHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUHook.h; sourceTree = "<group>"; };
+		3816BB722177552800030C99 /* MUHRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUHRuntime.h; sourceTree = "<group>"; };
+		3816BB732177552800030C99 /* NSObject+MUHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MUHook.h"; sourceTree = "<group>"; };
+		3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELSettingViewController.h; sourceTree = "<group>"; };
+		3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELSettingViewController.m; sourceTree = "<group>"; };
 		426B7A6709A0C0995B728377 /* Pods-ELWeChatDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ELWeChatDylib.release.xcconfig"; path = "Target Support Files/Pods-ELWeChatDylib/Pods-ELWeChatDylib.release.xcconfig"; sourceTree = "<group>"; };
 		CCD135182B59D0C653C6AD65 /* Pods-ELWeChatDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ELWeChatDylib.debug.xcconfig"; path = "Target Support Files/Pods-ELWeChatDylib/Pods-ELWeChatDylib.debug.xcconfig"; sourceTree = "<group>"; };
 		DCDD126519BA714AF93A52E7 /* Pods_ELWeChatDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ELWeChatDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +144,7 @@
 			children = (
 				3816BA97216C9E9B00030C99 /* ELWeChat */,
 				3816BAB2216C9E9C00030C99 /* ELWeChatDylib */,
+				3816BB6E2177552800030C99 /* MUHook */,
 				3816BAAB216C9E9C00030C99 /* Frameworks */,
 				3816BA96216C9E9B00030C99 /* Products */,
 				5D8E17BC18BA54AC18AC67F0 /* Pods */,
@@ -305,10 +316,22 @@
 		3816BB21216CB26000030C99 /* ELSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3816BB23216CB26000030C99 /* ELSettingViewController.h */,
-				3816BB22216CB26000030C99 /* ELSettingViewController.m */,
+				3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */,
+				3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */,
 			);
 			path = ELSettingViewController;
+			sourceTree = "<group>";
+		};
+		3816BB6E2177552800030C99 /* MUHook */ = {
+			isa = PBXGroup;
+			children = (
+				3816BB6F2177552800030C99 /* MUHook.m */,
+				3816BB702177552800030C99 /* NSObject+MUHook.m */,
+				3816BB712177552800030C99 /* MUHook.h */,
+				3816BB722177552800030C99 /* MUHRuntime.h */,
+				3816BB732177552800030C99 /* NSObject+MUHook.h */,
+			);
+			path = MUHook;
 			sourceTree = "<group>";
 		};
 		5D8E17BC18BA54AC18AC67F0 /* Pods */ = {
@@ -328,15 +351,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3816BAD8216C9E9C00030C99 /* ELWeChatDylib.h in Headers */,
-				3816BB28216CB26000030C99 /* ELSettingViewController.h in Headers */,
 				3816BB34216DE3A300030C99 /* ELAppManage.h in Headers */,
+				3816BB772177552800030C99 /* MUHRuntime.h in Headers */,
 				3816BB26216CB26000030C99 /* ELWeChatConfig.h in Headers */,
 				3816BABD216C9E9C00030C99 /* MDCycriptManager.h in Headers */,
 				3816BB30216DA57000030C99 /* ELRedEnvelopInfo.h in Headers */,
+				3849A8AF217DBC6400FE65F0 /* ELSettingViewController.h in Headers */,
+				3816BB762177552800030C99 /* MUHook.h in Headers */,
 				3816BAC1216C9E9C00030C99 /* MDMethodTrace.h in Headers */,
 				3816BACA216C9E9C00030C99 /* LLDBTools.h in Headers */,
 				3816BB24216CB26000030C99 /* ELWeChatHeaderinfo.h in Headers */,
 				3816BAB9216C9E9C00030C99 /* MDConfigManager.h in Headers */,
+				3816BB782177552800030C99 /* NSObject+MUHook.h in Headers */,
 				3816BAC5216C9E9C00030C99 /* ANYMethodLog.h in Headers */,
 				3816BAD6216C9E9C00030C99 /* fishhook.h in Headers */,
 			);
@@ -505,11 +531,13 @@
 			files = (
 				3816BABF216C9E9C00030C99 /* MDCycriptManager.m in Sources */,
 				3816BB31216DA57000030C99 /* ELRedEnvelopInfo.m in Sources */,
+				3816BB752177552800030C99 /* NSObject+MUHook.m in Sources */,
+				3816BB742177552800030C99 /* MUHook.m in Sources */,
 				3816BAC7216C9E9C00030C99 /* ANYMethodLog.m in Sources */,
 				3816BABB216C9E9C00030C99 /* MDConfigManager.m in Sources */,
+				3849A8B0217DBC6400FE65F0 /* ELSettingViewController.m in Sources */,
 				3816BACC216C9E9C00030C99 /* LLDBTools.mm in Sources */,
 				3816BB25216CB26000030C99 /* ELWeChatConfig.m in Sources */,
-				3816BB27216CB26000030C99 /* ELSettingViewController.m in Sources */,
 				3816BAB6216C9E9C00030C99 /* ELWeChatDylib.mm in Sources */,
 				3816BAC3216C9E9C00030C99 /* MDMethodTrace.m in Sources */,
 				3816BADA216C9E9C00030C99 /* ELWeChatDylib.m in Sources */,

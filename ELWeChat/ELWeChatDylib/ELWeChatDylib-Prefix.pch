@@ -8,6 +8,7 @@
 #import "ELAppManage.h"
 #import "YYModel.h"
 #import "HUD.h"
+#import "MUHook.h"
 
 #define kDocumentPath  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 

@@ -8,6 +8,7 @@
 
 #import "ELAppManage.h"
 
+#import <objc/runtime.h>
 @implementation ELAppManage
 
 +(id)sharedManage
@@ -39,6 +40,8 @@
     return self;
     
 }
+
+
 
 
 

@@ -17,7 +17,10 @@
 
 @property (nonatomic,assign) BOOL Message;
 
+@property (nonatomic,assign) BOOL StepManage;
 
+
+@property (nonatomic,assign) NSInteger ResetStepNum;
 
 - (BOOL)saveAppInfo:(ELWeChatConfig *)Config;
 

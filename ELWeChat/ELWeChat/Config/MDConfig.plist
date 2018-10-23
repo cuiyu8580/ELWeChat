@@ -8,7 +8,7 @@
 		<true/>
 		<key>CLASS_LIST</key>
 		<dict>
-			<key>CMessageMgr</key>
+			<key>CdnComMgr</key>
 			<string></string>
 		</dict>
 	</dict>
