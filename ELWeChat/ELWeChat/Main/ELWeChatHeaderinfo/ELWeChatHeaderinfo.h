@@ -504,6 +504,8 @@
 @interface WCDeviceBrandMgr : NSObject
 {
     WCDeviceM7Logic *_m7Logic;
+    
+    long long _lastReportBTStateTime;
 }
 
 - (void)onUploadDeviceStepReponse:(id)arg1 stepCount:(unsigned int)arg2 HKStepCount:(unsigned int)arg3 M7StepCount:(unsigned int)arg4 sourceWhiteList:(id)arg5 ErrorCode:(int)arg6;

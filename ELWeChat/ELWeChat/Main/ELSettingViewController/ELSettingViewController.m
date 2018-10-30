@@ -31,19 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-//    FindContactSearchViewCellInfo *mm = [NSClassFromString(@"FindContactSearchViewCellInfo") new];
-//
-//    NSLog(@"------%@",mm);
-//
-//    [mm doSearch:@"15993126618" Pre:YES];
-//
-//
-//    [mm doSearch];
-    
-//    CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
-//
-//    CContact *mm = [contactManager getContactForSearchByName:@"15993126618"];
+
     
     self.title = @"微信助手";
     
@@ -114,11 +102,6 @@
     
     
     WCDeviceBrandMgr *BrandMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("WCDeviceBrandMgr")];
-    
-    
-    //WCDeviceM7Logic *m7Logic = [BrandMgr valueForKey:@"_m7Logic"];
-    
-    
     
     
     NSInteger LastSetp = [BrandMgr getLastM7Step];
