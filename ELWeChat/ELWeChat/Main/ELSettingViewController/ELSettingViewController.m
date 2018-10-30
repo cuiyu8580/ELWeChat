@@ -10,9 +10,9 @@
 #import <objc/runtime.h>
 #import "ELWeChatConfig.h"
 #import "ELWeChatHeaderinfo.h"
+#import "WBMultiSelectGroupsViewController.h"
 
-
-@interface ELSettingViewController ()
+@interface ELSettingViewController ()<MultiSelectGroupsViewControllerDelegate>
 
 @property (nonatomic, strong) MMTableViewInfo *tableViewInfo;
 
@@ -31,6 +31,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    FindContactSearchViewCellInfo *mm = [NSClassFromString(@"FindContactSearchViewCellInfo") new];
+//
+//    NSLog(@"------%@",mm);
+//
+//    [mm doSearch:@"15993126618" Pre:YES];
+//
+//
+//    [mm doSearch];
+    
+//    CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+//
+//    CContact *mm = [contactManager getContactForSearchByName:@"15993126618"];
     
     self.title = @"微信助手";
     
@@ -102,6 +115,12 @@
     
     WCDeviceBrandMgr *BrandMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("WCDeviceBrandMgr")];
     
+    
+    //WCDeviceM7Logic *m7Logic = [BrandMgr valueForKey:@"_m7Logic"];
+    
+    
+    
+    
     NSInteger LastSetp = [BrandMgr getLastM7Step];
     
     NSInteger curSetp = LastSetp > [ELAppManage sharedManage].appConfig.ResetStepNum ? LastSetp : [ELAppManage sharedManage].appConfig.ResetStepNum;
@@ -118,6 +137,11 @@
     
     [sectionInfo addCell:[self addRedEnvelopSectionCell]];
     
+    if ([ELAppManage sharedManage].appConfig.autoRedEnvelop)
+    {
+        [sectionInfo addCell:[self addBlackListCell]];
+    }
+    
     [self.tableViewInfo addSection:sectionInfo];
 
 }
@@ -130,12 +154,36 @@
     
 }
 
+- (MMTableViewCellInfo *)addBlackListCell
+{
+    
+    if ([ELAppManage sharedManage].appConfig.blackList.count == 0) {
+        return [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(showBlackList) target:self title:@"群聊过滤" rightValue:@"已关闭" accessoryType:1];
+    } else {
+        NSString *blackListCountStr = [NSString stringWithFormat:@"已选择 %lu 个群", (unsigned long)[ELAppManage sharedManage].appConfig.blackList.count];
+        return [objc_getClass("MMTableViewCellInfo") normalCellForSel:@selector(showBlackList) target:self title:@"群聊过滤" rightValue:blackListCountStr accessoryType:1];
+    }
+
+    
+}
+
+
+- (void)showBlackList {
+    WBMultiSelectGroupsViewController *contactsViewController = [[WBMultiSelectGroupsViewController alloc] initWithBlackList:[ELAppManage sharedManage].appConfig.blackList];
+    contactsViewController.delegate = self;
+    
+    MMUINavigationController *navigationController = [[objc_getClass("MMUINavigationController") alloc] initWithRootViewController:contactsViewController];
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+
 - (void)RedEnvelopClick:(UISwitch *)RedEnvelopSwitch
 {
 
     [ELAppManage sharedManage].appConfig.autoRedEnvelop = RedEnvelopSwitch.on;
     
-    
+    [self reloadTableViewData];
 }
 
 - (void)addGroupManageSection
@@ -228,7 +276,17 @@
 }
 
 
-
+#pragma mark - MultiSelectGroupsViewControllerDelegate
+- (void)onMultiSelectGroupCancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)onMultiSelectGroupReturn:(NSArray *)arg1 {
+    [ELAppManage sharedManage].appConfig.blackList = arg1;
+    
+    [self reloadTableViewData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

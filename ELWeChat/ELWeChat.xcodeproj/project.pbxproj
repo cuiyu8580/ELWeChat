@@ -42,6 +42,7 @@
 		3816BB782177552800030C99 /* NSObject+MUHook.h in Headers */ = {isa = PBXBuildFile; fileRef = 3816BB732177552800030C99 /* NSObject+MUHook.h */; };
 		3849A8AF217DBC6400FE65F0 /* ELSettingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */; };
 		3849A8B0217DBC6400FE65F0 /* ELSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */; };
+		3849A8B321801D2900FE65F0 /* WBMultiSelectGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3849A8B121801D2900FE65F0 /* WBMultiSelectGroupsViewController.m */; };
 		95BDD33F998BAAA4AA5F3D37 /* Pods_ELWeChatDylib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCDD126519BA714AF93A52E7 /* Pods_ELWeChatDylib.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +113,8 @@
 		3816BB732177552800030C99 /* NSObject+MUHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MUHook.h"; sourceTree = "<group>"; };
 		3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELSettingViewController.h; sourceTree = "<group>"; };
 		3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELSettingViewController.m; sourceTree = "<group>"; };
+		3849A8B121801D2900FE65F0 /* WBMultiSelectGroupsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBMultiSelectGroupsViewController.m; sourceTree = "<group>"; };
+		3849A8B221801D2900FE65F0 /* WBMultiSelectGroupsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBMultiSelectGroupsViewController.h; sourceTree = "<group>"; };
 		426B7A6709A0C0995B728377 /* Pods-ELWeChatDylib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ELWeChatDylib.release.xcconfig"; path = "Target Support Files/Pods-ELWeChatDylib/Pods-ELWeChatDylib.release.xcconfig"; sourceTree = "<group>"; };
 		CCD135182B59D0C653C6AD65 /* Pods-ELWeChatDylib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ELWeChatDylib.debug.xcconfig"; path = "Target Support Files/Pods-ELWeChatDylib/Pods-ELWeChatDylib.debug.xcconfig"; sourceTree = "<group>"; };
 		DCDD126519BA714AF93A52E7 /* Pods_ELWeChatDylib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ELWeChatDylib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -316,6 +319,8 @@
 		3816BB21216CB26000030C99 /* ELSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3849A8B221801D2900FE65F0 /* WBMultiSelectGroupsViewController.h */,
+				3849A8B121801D2900FE65F0 /* WBMultiSelectGroupsViewController.m */,
 				3849A8AD217DBC6300FE65F0 /* ELSettingViewController.h */,
 				3849A8AE217DBC6400FE65F0 /* ELSettingViewController.m */,
 			);
@@ -538,6 +543,7 @@
 				3849A8B0217DBC6400FE65F0 /* ELSettingViewController.m in Sources */,
 				3816BACC216C9E9C00030C99 /* LLDBTools.mm in Sources */,
 				3816BB25216CB26000030C99 /* ELWeChatConfig.m in Sources */,
+				3849A8B321801D2900FE65F0 /* WBMultiSelectGroupsViewController.m in Sources */,
 				3816BAB6216C9E9C00030C99 /* ELWeChatDylib.mm in Sources */,
 				3816BAC3216C9E9C00030C99 /* MDMethodTrace.m in Sources */,
 				3816BADA216C9E9C00030C99 /* ELWeChatDylib.m in Sources */,

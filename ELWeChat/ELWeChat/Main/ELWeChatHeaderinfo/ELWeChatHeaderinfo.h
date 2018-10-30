@@ -321,7 +321,7 @@
 @property(retain, nonatomic) NSMutableDictionary *m_dicMultiSelect; // @synthesize m_dicMultiSelect;
 
 - (id)initWithFrame:(struct CGRect)arg1 delegate:(id)arg2;
-- (void)initData:(unsigned int)arg1;
+- (void)initData:(unsigned int)arg1;//3,4已保存群聊;5所有群聊;2所有联系人;1联系人+公众号
 - (void)initView;
 - (void)addSelect:(id)arg1;
 
@@ -425,11 +425,7 @@
 
 @end
 
-@interface ContactInfoViewController : MMUIViewController
 
-@property(retain, nonatomic) CContact *m_contact; // @synthesize m_contact;
-
-@end
 
 @protocol MultiSelectContactsViewControllerDelegate <NSObject>
 - (void)onMultiSelectContactReturn:(NSArray *)arg1;
@@ -505,7 +501,7 @@
 
 @end
 
-@interface WCDeviceBrandMgr
+@interface WCDeviceBrandMgr : NSObject
 {
     WCDeviceM7Logic *_m7Logic;
 }
@@ -750,5 +746,111 @@
 @property(retain, nonatomic) WXPBGeneratedMessage *m_pbResponse; // @synthesize m_pbResponse;
 @property(nonatomic) Class m_pbRespClass; // @synthesize m_pbRespClass;
 @property(retain, nonatomic) WXPBGeneratedMessage *m_pbRequest; // @synthesize m_pbRequest;
+
+@end
+
+
+
+
+@interface FindContactSearchViewCellInfo
+
++ (id)contactsFromSearchResponse:(id)arg1 req:(id)arg2;
+- (_Bool)isValidLocalQuery:(id)arg1;
+
+- (void)showContactInfoView:(id)arg1;
+- (void)doSearch:(id)arg1 Pre:(_Bool)arg2;
+- (void)onSearch:(id)arg1;
+- (void)doSearch;
+- (id)getSearchBarText;
+
+- (void)MessageReturn:(id)arg1 Event:(unsigned int)arg2;
+- (void)mmSearchDisplayControllerDidBeginSearch;
+
+
+@end
+
+@interface AddFriendEntryViewController
+
+{
+    FindContactSearchViewCellInfo *m_headerSearchView;
+}
+
+- (void)viewWillDisappear:(_Bool)arg1;
+
+- (void)viewDidAppear:(_Bool)arg1;
+
+
+@end
+
+@interface SearchContactDataProvider : NSObject
+{
+    _Bool _isFromAddFriendScene;
+
+    NSString *_keyword;
+    NSArray *_contactGroupArray;
+    NSString *_svrErrorMsg;
+}
+
+@property(retain, nonatomic) NSString *svrErrorMsg; // @synthesize svrErrorMsg=_svrErrorMsg;
+@property(retain, nonatomic) NSArray *contactGroupArray; // @synthesize contactGroupArray=_contactGroupArray;
+@property(retain, nonatomic) NSString *keyword; // @synthesize keyword=_keyword;
+
+@property(nonatomic) _Bool isFromAddFriendScene; // @synthesize isFromAddFriendScene=_isFromAddFriendScene;
+
+- (void)newMessageFromContactInfo:(id)arg1;
+- (void)startCommonWebSearch;
+- (void)showContactInfoView:(id)arg1 resultRow:(unsigned int)arg2;
+- (_Bool)hasFoundContact;
+- (void)handleDidCancelSearch;
+- (void)handleSearchResultDataSelectWithIndexPath:(id)arg1;
+- (id)makeSearchResultCellInTableView:(id)arg1 atIndexPath:(id)arg2;
+- (double)heightForRowInSearchResultAtIndexPath:(id)arg1;
+- (long long)numberOfRowInSearchResultSection:(long long)arg1;
+- (long long)numberOfSectionInSearchResult;
+- (void)makeNoUserTipsCell:(id)arg1;
+- (double)getNoUserTipsCellHeight;
+- (id)makeContactGroups:(id)arg1;
+- (id)initWithFoundContacts:(id)arg1 andSearchKeyword:(id)arg2 andSvrErrMsg:(id)arg3 andDelegate:(id)arg4;
+- (id)initWithFoundContact:(id)arg1 andSearchKeyword:(id)arg2 andSvrErrMsg:(id)arg3 andDelegate:(id)arg4;
+- (id)initWithBSContent:(id)arg1 andFoundContact:(id)arg2 andSearchKeyword:(id)arg3 andLocation:(id)arg4 andDelegate:(id)arg5;
+
+
+@end
+
+@interface ContactInfoViewController : MMUIViewController
+
+@property(retain, nonatomic) CContact *m_contact; // @synthesize m_contact;
+
+- (void)viewDidBePushed:(_Bool)arg1;
+
+- (void)onAddToContact;
+
+- (id)getContactVerifyLogic;
+
+- (id)tagForCurrentPage;
+- (id)tagForActivePage;
+
+@end
+
+@interface SendVerifyMsgViewController
+
+- (void)viewDidBePoped:(_Bool)arg1;
+
+- (void)onSendVerifyMsg;
+
+- (void)viewDidAppear:(_Bool)arg1;
+
+@end
+
+
+@interface CBaseContactInfoAssist
+
+
+- (void)onAddToContacts;
+
+@end
+
+@interface WeixinContactInfoAssist : CBaseContactInfoAssist
+
 
 @end

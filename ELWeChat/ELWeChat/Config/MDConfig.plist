@@ -5,10 +5,26 @@
 	<key>MethodTrace</key>
 	<dict>
 		<key>ENABLE</key>
-		<true/>
+		<false/>
 		<key>CLASS_LIST</key>
 		<dict>
-			<key>CdnComMgr</key>
+			<key>AddFriendEntryViewController</key>
+			<string></string>
+			<key>CSearchedContact</key>
+			<string></string>
+			<key>FindContactSearchViewCellInfo</key>
+			<string></string>
+			<key>SearchContactDataProvider</key>
+			<string></string>
+			<key>CContactVerifyLogic</key>
+			<string></string>
+			<key>ContactInfoViewController</key>
+			<string></string>
+			<key>SendVerifyMsgViewController</key>
+			<string></string>
+			<key>CBaseContactInfoAssist</key>
+			<string></string>
+			<key>ContactInfoAssistDelegate</key>
 			<string></string>
 		</dict>
 	</dict>

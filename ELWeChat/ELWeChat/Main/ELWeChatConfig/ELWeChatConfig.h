@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//#import "ELWeChatHeaderinfo.h"
 
 @interface ELWeChatConfig : NSObject
 
 @property (nonatomic,assign) BOOL autoRedEnvelop;
+
+@property (strong, nonatomic) NSArray *blackList;
 
 @property (nonatomic,assign) BOOL groupManage;
 
@@ -19,8 +21,10 @@
 
 @property (nonatomic,assign) BOOL StepManage;
 
-
 @property (nonatomic,assign) NSInteger ResetStepNum;
+
+
+@property (nonatomic) id Infor;
 
 - (BOOL)saveAppInfo:(ELWeChatConfig *)Config;
 

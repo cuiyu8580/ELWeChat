@@ -276,69 +276,91 @@ CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWr
     if([msgWrap m_uiMessageType] == 49 && [content rangeOfString:@"wxpay://"].location != NSNotFound)
     {
         
-        if([ELAppManage sharedManage].appConfig.autoRedEnvelop)
+        CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
+        CContact *selfContact = [contactManager getSelfContact];
+        
+        
+        BOOL (^isMyself)(void) = ^BOOL()
         {
+            return [msgWrap.m_nsFromUsr isEqualToString:selfContact.m_nsUsrName];
+        };
+        BOOL (^isMyselfSender)(void) = ^BOOL() {
+            return isMyself() && [msgWrap.m_nsToUsr rangeOfString:@"chatroom"].location != NSNotFound;
+        };
+        
+        
+        /** 是否在黑名单中 */
+        BOOL (^isGroupInBlackList)(void) = ^BOOL() {
             
-            CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:objc_getClass("CContactMgr")];
-            CContact *selfContact = [contactManager getSelfContact];
+            return [[ELAppManage sharedManage].appConfig.blackList containsObject:msgWrap.m_nsFromUsr];
             
-            
-            BOOL (^isMyself)(void) = ^BOOL()
+        };
+        
+        BOOL (^isAutoRedEnvelop)(void) = ^BOOL ()
+        {
+            if (![ELAppManage sharedManage].appConfig.autoRedEnvelop)
             {
-                return [msgWrap.m_nsFromUsr isEqualToString:selfContact.m_nsUsrName];
-            };
-            BOOL (^isMyselfSender)(void) = ^BOOL() {
-                return isMyself() && [msgWrap.m_nsToUsr rangeOfString:@"chatroom"].location != NSNotFound;
-            };
+                return NO;
+            }
             
-            
-            NSDictionary *(^NativeUrlDict)(NSString *) = ^(NSString *m_NativeUrl) {
-                m_NativeUrl = [m_NativeUrl substringFromIndex:[@"wxpay://c2cbizmessagehandler/hongbao/receivehongbao?" length]];
-                return [objc_getClass("WCBizUtil") dictionaryWithDecodedComponets:m_NativeUrl separator:@"&"];
-            };
-            
-            
-
-            void (^RedEnvelopReqeust)(NSDictionary *) = ^(NSDictionary *NativeUrlDict) {
-                NSMutableDictionary *m_dict = [NSMutableDictionary dictionary];
-                
-                [m_dict setValue:[NativeUrlDict stringForKey:@"channelid"] forKey:@"channelId"];
-                [m_dict setValue:@"0" forKey:@"agreeDuty"];
-                [m_dict setValue:[[msgWrap m_nsFromUsr] rangeOfString:@"@chatroom"].location != NSNotFound ? @"0" : @"1" forKey:@"inWay"];
-                [m_dict setValue:[NativeUrlDict stringForKey:@"msgtype"] forKey:@"msgType"];
-                [m_dict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
-                [m_dict setValue:[NativeUrlDict stringForKey:@"sendid"] forKey:@"sendId"];
-
-                WCRedEnvelopesLogicMgr *logicMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("WCRedEnvelopesLogicMgr") class]];
-                [logicMgr ReceiverQueryRedEnvelopesRequest:m_dict];
-            };
-            
-            
-            void(^saveRedEnvelopData)(NSDictionary *) = ^(NSDictionary *m_dict)
+            if (isGroupInBlackList())
             {
-                NSMutableDictionary *allDict = [NSMutableDictionary dictionaryWithDictionary:m_dict];
-                
-                [allDict setValue:[selfContact getContactDisplayName] forKey:@"nickName"];
-                
-                [allDict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
-                
-                [allDict setValue:[selfContact m_nsHeadImgUrl] forKey:@"headImg"];
-                
-                [allDict setValue:isMyself forKey:@"isMyself"];
-                
-                NSString *m_sessionUserName = isMyselfSender() ? msgWrap.m_nsToUsr : msgWrap.m_nsFromUsr;
-                
-                [allDict setValue:m_sessionUserName forKey:@"sessionUserName"];
-                
-                ELRedEnvelopInfo *redInfo = [ELRedEnvelopInfo yy_modelWithJSON:allDict];
-                
-                [ELAppManage sharedManage].redInfo = redInfo;
-                
-                [redInfo saveRedInfo:redInfo];
-                
-                
-            };
+                return NO;
+            }
             
+            return YES;
+        };
+        
+        NSDictionary *(^NativeUrlDict)(NSString *) = ^(NSString *m_NativeUrl) {
+            m_NativeUrl = [m_NativeUrl substringFromIndex:[@"wxpay://c2cbizmessagehandler/hongbao/receivehongbao?" length]];
+            return [objc_getClass("WCBizUtil") dictionaryWithDecodedComponets:m_NativeUrl separator:@"&"];
+        };
+        
+        
+        
+        void (^RedEnvelopReqeust)(NSDictionary *) = ^(NSDictionary *NativeUrlDict) {
+            NSMutableDictionary *m_dict = [NSMutableDictionary dictionary];
+            
+            [m_dict setValue:[NativeUrlDict stringForKey:@"channelid"] forKey:@"channelId"];
+            [m_dict setValue:@"0" forKey:@"agreeDuty"];
+            [m_dict setValue:[[msgWrap m_nsFromUsr] rangeOfString:@"@chatroom"].location != NSNotFound ? @"0" : @"1" forKey:@"inWay"];
+            [m_dict setValue:[NativeUrlDict stringForKey:@"msgtype"] forKey:@"msgType"];
+            [m_dict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
+            [m_dict setValue:[NativeUrlDict stringForKey:@"sendid"] forKey:@"sendId"];
+            
+            WCRedEnvelopesLogicMgr *logicMgr = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("WCRedEnvelopesLogicMgr") class]];
+            [logicMgr ReceiverQueryRedEnvelopesRequest:m_dict];
+        };
+        
+        
+        void(^saveRedEnvelopData)(NSDictionary *) = ^(NSDictionary *m_dict)
+        {
+            NSMutableDictionary *allDict = [NSMutableDictionary dictionaryWithDictionary:m_dict];
+            
+            [allDict setValue:[selfContact getContactDisplayName] forKey:@"nickName"];
+            
+            [allDict setValue:[[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl] forKey:@"nativeUrl"];
+            
+            [allDict setValue:[selfContact m_nsHeadImgUrl] forKey:@"headImg"];
+            
+            [allDict setValue:isMyself forKey:@"isMyself"];
+            
+            NSString *m_sessionUserName = isMyselfSender() ? msgWrap.m_nsToUsr : msgWrap.m_nsFromUsr;
+            
+            [allDict setValue:m_sessionUserName forKey:@"sessionUserName"];
+            
+            ELRedEnvelopInfo *redInfo = [ELRedEnvelopInfo yy_modelWithJSON:allDict];
+            
+            [ELAppManage sharedManage].redInfo = redInfo;
+            
+            [redInfo saveRedInfo:redInfo];
+            
+            
+        };
+        
+        
+        if (isAutoRedEnvelop())
+        {
             NSString *m_NativeUrl = [[msgWrap m_oWCPayInfoItem] m_c2cNativeUrl];
             
             NSDictionary *m_NativeUrlDict = NativeUrlDict(m_NativeUrl);
@@ -347,6 +369,7 @@ CHOptimizedMethod2(self, void, CMessageMgr, AsyncOnAddMsg, NSString*, msg, MsgWr
             
             saveRedEnvelopData(m_NativeUrlDict);
         }
+        
         
     }
     
@@ -615,39 +638,9 @@ CHOptimizedMethod6(self, void, WCDeviceBrandMgr, onUploadDeviceStepReponse, id, 
 }
 
 
-CHDeclareClass(WCTimelineDataProvider)
-
-CHOptimizedMethod3(self, void, WCTimelineDataProvider, requestForSnsTimeLineRequest, id, arg1, minID, id, arg2, lastRequestTime, int, arg3)
-{
-    
-    CHSuper3(WCTimelineDataProvider, requestForSnsTimeLineRequest, arg1, minID, arg2, lastRequestTime, arg3);
-    
-}
-//- (void)MessageReturn:(id)arg1 Event:(unsigned int)arg2;
-
-CHOptimizedMethod2(self, BOOL, WCTimelineDataProvider, responseForSnsTimeLineResponse, id, arg1, Event, int, arg2)
-{
-    
-    
-   return CHSuper2(WCTimelineDataProvider, responseForSnsTimeLineResponse, arg1, Event, arg2);
-    
-}
-//- (_Bool)responseForSnsTimeLineResponse:(id)arg1 Event:(unsigned int)arg2;
-
-
-
-
 #pragma mark - CHConstructor
 
 CHConstructor{
-    
-    
-    
-    CHLoadLateClass(WCTimelineDataProvider);
-    
-    CHHook3(WCTimelineDataProvider, requestForSnsTimeLineRequest, minID, lastRequestTime);
-    
-    CHHook2(WCTimelineDataProvider, responseForSnsTimeLineResponse, Event);
     
     CHLoadLateClass(WCDeviceBrandMgr);
     
