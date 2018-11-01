@@ -13,7 +13,7 @@ QQ交流群：930556714（有问题请加）
 
 ### 关于安装
 云盘提供.ipa，云盘提供的.ipa文件需要重新签名才可以安装，推荐使用[ios-app-signer](https://github.com/DanTheMan827/ios-app-signer)<br>
-![ios-app-signer.png](./ELWeChat/ios-app-signer.png)
+![ios-app-signer.png](./ios-app-signer.png)
 <br>
 下面提供几种方法可以使用：[提供几种常见的ipa文件安装方式](https://www.jianshu.com/p/2bf09385741a)
 
